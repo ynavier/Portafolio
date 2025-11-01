@@ -28,9 +28,7 @@ const AcademicSection = () => {
                   <Calendar className="w-4 h-4 mr-1" />
                   {item.year}
                 </span>
-                <p className="text-green-600 dark:text-green-400 font-medium text-sm mt-1">
-                  {item.grade}
-                </p>
+                
               </div>
             </div>
             <p className="text-gray-600 dark:text-gray-300">{item.description}</p>

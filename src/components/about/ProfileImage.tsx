@@ -14,14 +14,14 @@ const ProfileImage: React.FC = () => {
         <div className="absolute inset-0 rounded-full border border-white/10 animate-wave-continuous"></div>
 
         {/* Sombra flotante */}
-        <div className="absolute inset-0 bg-black/20 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 animate-pulse"></div>
+        <div className="absolute inset-0 bg-black/20 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-1000 animate-pulse"></div>
 
         {/* Imagen principal */}
-        <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500 ease-out">
+        <div className="relative w-96 h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-1000 ease-out">
           <img
             src="/imageme.jpg"
             alt="Perfil profesional"
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1500 ease-out"
           />
         </div>
 
@@ -35,11 +35,11 @@ const ProfileImage: React.FC = () => {
             0%, 100% { transform: scale(1); opacity: 0.1; }
             50% { transform: scale(1.1); opacity: 0.3; }
           }
-          .animate-wave-1 { animation: wave-expand 2s ease-out infinite; animation-delay: 0s; }
-          .animate-wave-2 { animation: wave-expand 2s ease-out infinite; animation-delay: 0.5s; }
-          .animate-wave-3 { animation: wave-expand 2s ease-out infinite; animation-delay: 1s; }
-          .animate-wave-4 { animation: wave-expand 2s ease-out infinite; animation-delay: 1.5s; }
-          .animate-wave-continuous { animation: wave-continuous 4s ease-in-out infinite; }
+          .animate-wave-1 { animation: wave-expand 4s ease-out infinite; animation-delay: 0s; }
+          .animate-wave-2 { animation: wave-expand 4s ease-out infinite; animation-delay: 1s; }
+          .animate-wave-3 { animation: wave-expand 4s ease-out infinite; animation-delay: 2s; }
+          .animate-wave-4 { animation: wave-expand 4s ease-out infinite; animation-delay: 3s; }
+          .animate-wave-continuous { animation: wave-continuous 8s ease-in-out infinite; }
         `}</style>
       </div>
     </div>

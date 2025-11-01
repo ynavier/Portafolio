@@ -1,6 +1,6 @@
 import AcademicSection from "./AcademicSection";
 import Certifications from "./Certifications";
-import Stats from "./Stats";
+import AnimatedSection from "../common/AnimatedSection";
 
 const Education = () => {
   return (
@@ -9,7 +9,7 @@ const Education = () => {
       className="py-20 bg-slate-50 dark:bg-gray-900 transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Educación y Certificaciones
           </h2>
@@ -18,11 +18,15 @@ const Education = () => {
             Formación académica sólida complementada con certificaciones
             industriales y aprendizaje continuo en tecnologías emergentes
           </p>
-        </div>
+        </AnimatedSection>
 
-        <AcademicSection />
-        <Certifications />
-        <Stats />
+        <AnimatedSection delay={0.2}>
+          <AcademicSection />
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.3}>
+          <Certifications />
+        </AnimatedSection>
       </div>
     </section>
   );

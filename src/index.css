@@ -5,10 +5,28 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
-  
+
   body {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  /* Para Firefox */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Para IE y Edge */
+  body {
+    -ms-overflow-style: none;
   }
 }
 

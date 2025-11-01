@@ -3,6 +3,7 @@ import ContactInfo from "./ContactInfo";
 import ContactForm from "./ContactForm";
 import SocialLinks from "./SocialLinks";
 import NotificationToast from "./NotificationToast";
+import AnimatedSection from "../common/AnimatedSection";
 
 declare global {
   interface Window {
@@ -44,14 +45,14 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300"
+      className="py-20 bg-slate-50 dark:bg-gray-900 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Notificación */}
         <NotificationToast notification={notification} />
 
         {/* Título */}
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Contacto
           </h2>
@@ -59,20 +60,22 @@ const Contact: React.FC = () => {
             ¿Tienes un proyecto en mente? Me encantaría escuchar sobre tus
             desafíos de datos y BI.
           </p>
-        </div>
+        </AnimatedSection>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Columna Izquierda */}
-          <div className="space-y-8">
+          <AnimatedSection delay={0.2} direction="left" className="space-y-8">
             <ContactInfo />
             <SocialLinks />
-          </div>
+          </AnimatedSection>
 
           {/* Columna Derecha */}
-          <ContactForm
-            emailjsLoaded={emailjsLoaded}
-            showNotification={showNotification}
-          />
+          <AnimatedSection delay={0.3} direction="right">
+            <ContactForm
+              emailjsLoaded={emailjsLoaded}
+              showNotification={showNotification}
+            />
+          </AnimatedSection>
         </div>
       </div>
     </section>

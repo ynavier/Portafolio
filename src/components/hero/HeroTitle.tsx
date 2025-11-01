@@ -13,7 +13,7 @@ const HeroTitle = () => {
           <span className="text-blue-600 font-medium">|</span>
           <div className="w-12 h-0.5 bg-blue-600 ml-3"></div>
         </div>
-        <p>Especialista en Business Intelligence</p>
+        <p>Business Intelligence</p>
       </div>
     </>
   );
