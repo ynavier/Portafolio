@@ -17,7 +17,7 @@ const HeroSocials = () => {
         <Linkedin size={24} />
       </motion.a>
       <motion.a
-        href="https://github.com/VidalYC"
+        href="https://github.com/ynavier"
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"

@@ -17,7 +17,7 @@ const SocialLinks: React.FC = () => {
           <Linkedin className="h-6 w-6" />
         </a>
         <a
-          href="https://github.com/VidalYC"
+          href="https://github.com/ynavier"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center w-12 h-12 bg-gray-800 text-white rounded-lg hover:bg-gray-900 hover:scale-110 transition-all"
