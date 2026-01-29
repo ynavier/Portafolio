@@ -1,4 +1,4 @@
-import { Award, Medal, Trophy, Star, Crown, Cloud } from "lucide-react";
+import { Award, Medal, Trophy, Star, Crown, Cloud, BarChart3 } from "lucide-react";
 
 export const education = [
   {
@@ -65,6 +65,17 @@ export const certifications = [
     icon: Crown,
     color: "from-yellow-500 to-yellow-600",
     logo: "https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg",
+    link: "#"
+  },
+  {
+    name: "Análisis De Datos Nivel Básico",
+    issuer: "Talento Tech",
+    year: "2025",
+    date: "05 Enero 2025",
+    description: "Fundamentos del análisis de datos, técnicas de exploración y visualización de información.",
+    icon: BarChart3,
+    color: "from-purple-500 to-purple-600",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
     link: "#"
   },
   {
