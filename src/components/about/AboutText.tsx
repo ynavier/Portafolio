@@ -15,7 +15,7 @@ const AboutText: React.FC = () => {
   return (
     <div className="space-y-6">
       <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-        🌟 Soy estudiante de Ingeniería de Sistemas <strong>(9.º semestre)</strong> 
+        🌟 Soy estudiante de Ingeniería de Sistemas <strong>(10.º semestre)</strong> 
         en la Universidad Popular del Cesar, con gran interés y formación 
         en el ecosistema de datos moderno 📊.
       </p>
