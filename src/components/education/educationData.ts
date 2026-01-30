@@ -111,5 +111,49 @@ export const certifications = [
     color: "from-red-500 to-red-600",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg",
     link: "#"
+  },
+  {
+    name: "Introduction to MongoDB",
+    issuer: "MongoDB",
+    year: "2025",
+    date: "16 Febrero 2025",
+    description: "Curso introductorio sobre bases de datos NoSQL, arquitectura de MongoDB y operaciones básicas de consulta.",
+    icon: Award,
+    color: "from-green-600 to-green-700",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    link: "#"
+  },
+  {
+    name: "MongoDB Data Modeling Skills for Developers",
+    issuer: "MongoDB",
+    year: "2025",
+    date: "28 Febrero 2025",
+    description: "Modelado de datos en MongoDB, diseño de documentos eficientes y buenas prácticas para aplicaciones escalables.",
+    icon: Medal,
+    color: "from-green-600 to-green-700",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    link: "#"
+  },
+  {
+    name: "Schema Design Patterns and Antipatterns",
+    issuer: "MongoDB",
+    year: "2025",
+    date: "28 Febrero 2025",
+    description: "Patrones y antipatrónes de diseño de esquemas en MongoDB para optimizar rendimiento y mantenibilidad.",
+    icon: Trophy,
+    color: "from-green-600 to-green-700",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    link: "#"
+  },
+  {
+    name: "Advanced Schema Patterns and Antipatterns",
+    issuer: "MongoDB",
+    year: "2025",
+    date: "28 Febrero 2025",
+    description: "Diseño avanzado de esquemas en MongoDB, técnicas de optimización y estrategias para aplicaciones complejas.",
+    icon: Star,
+    color: "from-green-600 to-green-700",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    link: "#"
   }
 ];
