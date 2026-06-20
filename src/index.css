@@ -22,6 +22,7 @@
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    cursor: none;
   }
   html::-webkit-scrollbar { display: none; }
 
@@ -41,7 +42,7 @@
     color: #fff;
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; cursor: none; }
 }
 
 @layer utilities {

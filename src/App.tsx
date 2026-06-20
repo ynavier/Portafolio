@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Header from './components/header/Header';
+import CustomCursor from './components/common/CustomCursor';
 import Hero from './components/hero/Hero';
 import About from './components/about/About';
 import TechStack from './components/techStack/TechStack';
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <SmoothScroll>
+      <CustomCursor />
       <div style={{ backgroundColor: 'var(--bg)', color: 'var(--fg)', minHeight: '100vh' }}>
         <Header />
         <Hero />

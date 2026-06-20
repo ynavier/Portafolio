@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Github, Linkedin, Mail, Download, ArrowDown } from 'lucide-react';
+import HeroShape from './HeroShape';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,7 +61,8 @@ const Hero = () => {
         overflow: 'hidden',
       }}
     >
-      <div className="h-content" style={{ width: '100%' }}>
+      <HeroShape />
+      <div className="h-content" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
 
         {/* Label row */}
         <div className="h-label" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
@@ -71,45 +73,24 @@ const Hero = () => {
           <span className="text-label">Valledupar, Colombia</span>
         </div>
 
-        {/* Name + foto */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '3rem' }}>
-          <h1 style={{ marginBottom: 0, flexShrink: 0 }}>
-            <div style={{ overflow: 'hidden' }}>
-              <span className="h-line-1 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
-                YORIEL
-              </span>
-            </div>
-            <div style={{ overflow: 'hidden' }}>
-              <span className="h-line-2 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
-                CARVAJALINO
-              </span>
-            </div>
-          </h1>
-
-          <div
-            className="h-photo"
-            style={{
-              flexShrink: 0,
-              width: 'clamp(180px, 22vw, 300px)',
-              height: 'clamp(180px, 22vw, 300px)',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              border: '1px solid var(--border-strong)',
-              marginRight: '8vw',
-            }}
-          >
-            <img
-              src="/imageme.jpg"
-              alt="Yoriel Carvajalino"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 38%' }}
-            />
+        {/* Name */}
+        <h1 style={{ marginBottom: 0 }}>
+          <div style={{ overflow: 'hidden' }}>
+            <span className="h-line-1 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
+              YORIEL
+            </span>
           </div>
-        </div>
+          <div style={{ overflow: 'hidden' }}>
+            <span className="h-line-2 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
+              CARVAJALINO
+            </span>
+          </div>
+        </h1>
 
-        {/* Separator */}
+        {/* Separator — llega hasta donde termina CARVAJALINO, no hasta la esfera */}
         <div
           className="h-sep"
-          style={{ width: '100%', height: 1, backgroundColor: 'var(--border-strong)', margin: '2.5rem 0 2rem' }}
+          style={{ width: 'min(100%, 68%)', height: 1, backgroundColor: 'var(--border-strong)', margin: '2.5rem 0 2rem' }}
         />
 
         {/* Bottom row */}
@@ -121,8 +102,41 @@ const Hero = () => {
             ETL, Data Warehousing y visualización cloud.
           </p>
 
-          {/* Socials + actions row */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem' }}>
+          {/* Action buttons */}
+          <div className="h-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+              style={{
+                backgroundColor: 'var(--fg)', color: 'var(--bg)',
+                padding: '0.65rem 1.5rem', borderRadius: '100px',
+                fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.07em',
+                textTransform: 'uppercase', transition: 'opacity 0.2s', border: 'none', cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.82')}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+            >
+              Ver proyectos
+            </button>
+            <button
+              onClick={handleDownloadCV}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                border: '1px solid var(--border-strong)', color: 'var(--fg)',
+                padding: '0.65rem 1.5rem', borderRadius: '100px',
+                fontSize: '0.75rem', fontWeight: 500, letterSpacing: '0.07em',
+                textTransform: 'uppercase', transition: 'background 0.2s',
+                backgroundColor: 'transparent', cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <Download size={13} strokeWidth={2} />
+              Descargar CV
+            </button>
+          </div>
+
+          {/* Socials row */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1.5rem' }}>
 
             {/* Social icons */}
             <div className="h-socials" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
@@ -153,38 +167,6 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Action buttons */}
-            <div className="h-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-              <button
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-                style={{
-                  backgroundColor: 'var(--fg)', color: 'var(--bg)',
-                  padding: '0.65rem 1.5rem', borderRadius: '100px',
-                  fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.07em',
-                  textTransform: 'uppercase', transition: 'opacity 0.2s', border: 'none', cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.82')}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-              >
-                Ver proyectos
-              </button>
-              <button
-                onClick={handleDownloadCV}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                  border: '1px solid var(--border-strong)', color: 'var(--fg)',
-                  padding: '0.65rem 1.5rem', borderRadius: '100px',
-                  fontSize: '0.75rem', fontWeight: 500, letterSpacing: '0.07em',
-                  textTransform: 'uppercase', transition: 'background 0.2s',
-                  backgroundColor: 'transparent', cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-              >
-                <Download size={13} strokeWidth={2} />
-                Descargar CV
-              </button>
-            </div>
           </div>
         </div>
       </div>
