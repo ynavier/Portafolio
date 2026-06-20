@@ -41,7 +41,7 @@ const AcademicSection = () => {
                   letterSpacing: '0.05em',
                 }}
               >
-                2025
+                Sept. 2026
               </span>
             </div>
             <p style={{ color: 'var(--accent)', fontSize: '0.82rem', fontWeight: 500, marginBottom: '0.5rem' }}>
