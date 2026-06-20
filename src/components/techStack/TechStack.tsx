@@ -1,61 +1,56 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { technologies } from './Data';
-import { TechBand } from './TechBand';
-import './animations.css';
+import SolarSystem from './SolarSystem';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const TECHS = [
+  { name: 'Python',        color: '#3776ab', level: 85 },
+  { name: 'PostgreSQL',    color: '#336791', level: 82 },
+  { name: 'Power BI',      color: '#f2c811', level: 76 },
+  { name: 'Google Cloud',  color: '#4285f4', level: 65 },
+  { name: 'Apache Spark',  color: '#e25a1c', level: 60 },
+  { name: 'MongoDB',       color: '#47a248', level: 68 },
+  { name: 'Docker',        color: '#2496ed', level: 65 },
+];
 
 const TechStack = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const band1 = [
-    ...technologies['Lenguajes'],
-    ...technologies['Databases'],
-    ...technologies['Cloud Platforms'],
-  ];
-  const band2 = [
-    ...technologies['Big Data & Streaming'],
-    ...technologies['Microsoft Stack'],
-    ...technologies['BI & Visualization'],
-  ];
-
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Tag fade in
+      const st = { end: 'bottom top', toggleActions: 'play reverse play reverse' };
+
       gsap.from('.ts-tag', {
-        opacity: 0, y: 14, duration: 0.7, ease: 'expo.out',
-        scrollTrigger: { trigger: '.ts-tag', start: 'top 88%', end: 'bottom top', toggleActions: 'play reverse play reverse' },
+        opacity: 0, x: 20, duration: 0.7, ease: 'expo.out',
+        scrollTrigger: { trigger: '.ts-tag', start: 'top 88%', ...st },
       });
-
-      gsap.from('.ts-title-block', {
-        clipPath: 'inset(0 0 100% 0)',
-        duration: 1.2, ease: 'expo.out',
-        scrollTrigger: { trigger: '.ts-title-block', start: 'top 85%', end: 'bottom top', toggleActions: 'play reverse play reverse' },
+      gsap.from('.ts-title-1', {
+        x: 60, opacity: 0, duration: 1, ease: 'expo.out',
+        scrollTrigger: { trigger: '.ts-title-1', start: 'top 85%', ...st },
       });
-
+      gsap.from('.ts-title-2', {
+        x: 60, opacity: 0, duration: 1, delay: 0.08, ease: 'expo.out',
+        scrollTrigger: { trigger: '.ts-title-2', start: 'top 85%', ...st },
+      });
       gsap.from('.ts-sub', {
-        opacity: 0, y: 20, duration: 0.8, delay: 0.1, ease: 'expo.out',
-        scrollTrigger: { trigger: '.ts-sub', start: 'top 88%', end: 'bottom top', toggleActions: 'play reverse play reverse' },
+        opacity: 0, x: 20, duration: 0.8, delay: 0.15, ease: 'expo.out',
+        scrollTrigger: { trigger: '.ts-sub', start: 'top 88%', ...st },
       });
 
-      // Bands: parallax scrub — band1 va hacia la izquierda, band2 hacia la derecha
-      gsap.to('.ts-band-wrap-1', {
-        x: -60, ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom', end: 'bottom top',
-          scrub: true,
-        },
-      });
-      gsap.to('.ts-band-wrap-2', {
-        x: 60, ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom', end: 'bottom top',
-          scrub: true,
-        },
+      // Barras de progreso: animan de derecha a izquierda
+      TECHS.forEach((t, i) => {
+        gsap.fromTo(`.ts-bar-${i}`,
+          { width: '0%' },
+          {
+            width: `${t.level}%`,
+            duration: 1.2,
+            delay: i * 0.08,
+            ease: 'expo.out',
+            scrollTrigger: { trigger: '.ts-bars', start: 'top 85%', ...st },
+          }
+        );
       });
     }, sectionRef);
 
@@ -69,37 +64,83 @@ const TechStack = () => {
       style={{
         backgroundColor: 'var(--bg)',
         borderTop: '1px solid var(--border)',
-        paddingTop: '7rem',
-        paddingBottom: '7rem',
+        height: '100svh',
+        position: 'relative',
         overflow: 'hidden',
       }}
     >
-      <div className="max-w-[1200px] mx-auto px-[1.75rem] mb-16">
-        <div className="ts-tag flex items-baseline gap-3 mb-8">
-          <span className="font-display font-bold" style={{ color: 'var(--accent)', fontSize: '0.75rem' }}>02</span>
-          <span className="text-label">Stack tecnológico</span>
-        </div>
-
-        <div className="ts-title-block" style={{ clipPath: 'inset(0 0 0% 0)' }}>
-          <h2 className="font-display font-extrabold text-section" style={{ color: 'var(--fg)', lineHeight: 0.92 }}>
-            HERRAMIENTAS
-            <br />
-            &amp; TECNOLOGÍAS
-          </h2>
-        </div>
-
-        <p className="ts-sub mt-8" style={{ color: 'var(--fg-muted)', fontSize: '1.05rem', maxWidth: '50ch', lineHeight: 1.7 }}>
-          Tecnologías y herramientas con las que trabajo para crear soluciones
-          de datos robustas y escalables.
-        </p>
+      {/* Canvas full-width como fondo de espacio */}
+      <div style={{ position: 'absolute', inset: 0 }}>
+        <SolarSystem />
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <div className="ts-band-wrap-1">
-          <TechBand techs={band1} direction="left" speed="medium" />
+      {/* Overlay derecho: título + barras flotando en el espacio */}
+      <div style={{
+        position: 'absolute',
+        top: 0, right: 0,
+        width: '42%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '0 2.5rem 0 1.5rem',
+        alignItems: 'flex-end',
+        paddingBottom: '8vh',
+      }}>
+        {/* Tag */}
+        <div className="ts-tag" style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', marginBottom: '1.5rem' }}>
+          <span className="text-label">Stack tecnológico</span>
+          <span className="font-display font-bold" style={{ color: 'var(--accent)', fontSize: '0.75rem' }}>02</span>
         </div>
-        <div className="ts-band-wrap-2">
-          <TechBand techs={band2} direction="right" speed="medium" />
+
+        {/* Título alineado a la derecha */}
+        <h2
+          className="ts-title-1 font-display font-extrabold"
+          style={{ color: 'var(--fg)', lineHeight: 0.92, textAlign: 'right', marginBottom: '0.06em',
+            fontSize: 'clamp(2rem, 4.2vw, 4.5rem)', letterSpacing: '-0.025em' }}
+        >
+          STACK
+        </h2>
+        <h2
+          className="ts-title-2 font-display font-extrabold"
+          style={{ color: 'var(--fg)', lineHeight: 0.92, textAlign: 'right', marginBottom: '2rem',
+            fontSize: 'clamp(2rem, 4.2vw, 4.5rem)', letterSpacing: '-0.025em' }}
+        >
+          TECNOLÓGICO
+        </h2>
+
+        <p className="ts-sub" style={{
+          color: 'var(--fg-muted)', fontSize: '0.85rem', lineHeight: 1.7,
+          textAlign: 'right', maxWidth: '28ch', marginBottom: '2rem',
+        }}>
+          Pasa el cursor sobre los planetas para ver cada tecnología.
+        </p>
+
+        {/* Barras de destreza */}
+        <div className="ts-bars" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          {TECHS.map((t, i) => (
+            <div key={t.name}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', marginBottom: '5px' }}>
+                <span style={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--fg)', letterSpacing: '0.04em' }}>
+                  {t.name}
+                </span>
+              </div>
+              {/* Track */}
+              <div style={{ height: 1.5, backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden', position: 'relative', maxWidth: 140, marginLeft: 'auto' }}>
+                <div
+                  className={`ts-bar-${i}`}
+                  style={{
+                    position: 'absolute',
+                    right: 0, top: 0, bottom: 0,
+                    width: '0%',
+                    backgroundColor: t.color,
+                    borderRadius: 2,
+                    boxShadow: `0 0 6px ${t.color}88`,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -115,23 +115,18 @@ const ContactForm: React.FC<Props> = ({ emailjsLoaded, showNotification }) => {
       <button
         type="submit"
         disabled={isSubmitting || isSubmitted}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '0.5rem',
-          padding: '0.85rem 2rem',
-          borderRadius: '8px',
-          backgroundColor: isSubmitted ? '#1a3a1a' : 'var(--fg)',
-          color: isSubmitted ? '#4acf60' : 'var(--bg)',
-          border: isSubmitted ? '1px solid #4acf60' : 'none',
-          fontWeight: 600,
-          fontSize: '0.82rem',
-          letterSpacing: '0.06em',
-          textTransform: 'uppercase',
-          cursor: isSubmitting || isSubmitted ? 'default' : 'pointer',
-          opacity: isSubmitting ? 0.7 : 1,
-          transition: 'all 0.3s ease',
+        className={isSubmitted ? undefined : 'btn-cross-accent'}
+        style={isSubmitted ? {
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          gap: '0.5rem', padding: '0.75rem 2rem',
+          backgroundColor: '#1a3a1a', color: '#4acf60',
+          border: '1px solid #4acf60', fontWeight: 600,
+          fontSize: '0.78rem', letterSpacing: '0.07em', textTransform: 'uppercase',
+          cursor: 'default', opacity: 1,
+        } : {
+          opacity: isSubmitting ? 0.65 : 1,
+          cursor: isSubmitting ? 'default' : undefined,
+          width: '100%', justifyContent: 'center',
         }}
       >
         {isSubmitted ? (

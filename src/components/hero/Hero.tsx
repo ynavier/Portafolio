@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Github, Linkedin, Mail, Download, ArrowDown } from 'lucide-react';
 import HeroShape from './HeroShape';
+import HeroParticles from './HeroParticles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,9 +59,9 @@ const Hero = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '7rem 1.75rem 5rem',
-        overflow: 'hidden',
       }}
     >
+      <HeroParticles />
       <HeroShape />
       <div className="h-content" style={{ width: '100%', position: 'relative', zIndex: 1 }}>
 
@@ -103,32 +104,16 @@ const Hero = () => {
           </p>
 
           {/* Action buttons */}
-          <div className="h-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div className="h-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button
+              className="btn-cross-accent"
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-              style={{
-                backgroundColor: 'var(--fg)', color: 'var(--bg)',
-                padding: '0.65rem 1.5rem', borderRadius: '100px',
-                fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.07em',
-                textTransform: 'uppercase', transition: 'opacity 0.2s', border: 'none', cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.82')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               Ver proyectos
             </button>
             <button
+              className="btn-cross"
               onClick={handleDownloadCV}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-                border: '1px solid var(--border-strong)', color: 'var(--fg)',
-                padding: '0.65rem 1.5rem', borderRadius: '100px',
-                fontSize: '0.75rem', fontWeight: 500, letterSpacing: '0.07em',
-                textTransform: 'uppercase', transition: 'background 0.2s',
-                backgroundColor: 'transparent', cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.06)')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
             >
               <Download size={13} strokeWidth={2} />
               Descargar CV

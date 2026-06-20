@@ -85,6 +85,96 @@
     clip-path: inset(0 0 100% 0);
   }
 
+  /* ── Botones estilo cross (Uiverse) ──────────────── */
+
+  /* Base compartida */
+  .btn-cross,
+  .btn-cross-accent {
+    position: relative;
+    height: 46px;
+    padding: 0 28px;
+    background: var(--bg);
+    user-select: none;
+    white-space: nowrap;
+    transition: all .05s linear;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    z-index: 0;
+  }
+
+  /* Variante blanca (borde blanco) */
+  .btn-cross {
+    border: 2px solid var(--fg);
+    color: var(--fg);
+  }
+
+  .btn-cross::before,
+  .btn-cross::after {
+    content: "";
+    position: absolute;
+    background: var(--bg);
+    transition: all .2s linear;
+    z-index: -1;
+  }
+
+  /* Variante acento (borde azul) */
+  .btn-cross-accent {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-cross-accent::before,
+  .btn-cross-accent::after {
+    content: "";
+    position: absolute;
+    background: var(--bg);
+    transition: all .2s linear;
+    z-index: -1;
+  }
+
+  /* Pseudo-elementos compartidos */
+  .btn-cross::before,
+  .btn-cross-accent::before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+  }
+
+  .btn-cross::after,
+  .btn-cross-accent::after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+  }
+
+  .btn-cross:hover,
+  .btn-cross-accent:hover { cursor: crosshair; }
+
+  .btn-cross:active,
+  .btn-cross-accent:active { transform: scale(0.95); }
+
+  .btn-cross:hover::before,
+  .btn-cross-accent:hover::before {
+    height: calc(100% - 32px);
+    top: 16px;
+  }
+
+  .btn-cross:hover::after,
+  .btn-cross-accent:hover::after {
+    width: calc(100% - 32px);
+    left: 16px;
+  }
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;

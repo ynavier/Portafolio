@@ -13,91 +13,64 @@ const HeroShape = () => {
     const w = container.offsetWidth;
     const h = container.offsetHeight;
 
-    // ── Escena ──────────────────────────────────────────
-    const scene    = new THREE.Scene();
-    const camera   = new THREE.PerspectiveCamera(55, w / h, 0.1, 100);
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, w / h, 0.1, 100);
     camera.position.z = 4;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(w, h);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
+    renderer.domElement.style.background = 'transparent';
     container.appendChild(renderer.domElement);
 
-    // ── Icosaedro wireframe (acento azul) ───────────────
-    const icoGeo = new THREE.IcosahedronGeometry(1, 1);
-    const icoMat = new THREE.MeshBasicMaterial({
-      color: 0x4a65f5,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.55,
-    });
-    const ico = new THREE.Mesh(icoGeo, icoMat);
-    scene.add(ico);
+    const group = new THREE.Group();
+    scene.add(group);
 
-    // ── Esfera de puntos exterior (blanco) ──────────────
-    const ptGeo  = new THREE.IcosahedronGeometry(1.55, 3);
-    const ptMat  = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.018,
-      transparent: true,
-      opacity: 0.25,
-    });
-    const points = new THREE.Points(ptGeo, ptMat);
-    scene.add(points);
+    const icoMat = new THREE.MeshBasicMaterial({ color: 0x4a65f5, wireframe: true, transparent: true, opacity: 0.6 });
+    group.add(new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), icoMat));
 
-    // ── Icosaedro exterior sutil ────────────────────────
-    const outerGeo = new THREE.IcosahedronGeometry(1.55, 1);
-    const outerMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.06,
-    });
-    const outer = new THREE.Mesh(outerGeo, outerMat);
-    scene.add(outer);
+    const outerMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.07 });
+    group.add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.6, 1), outerMat));
 
-    // ── Animación continua ──────────────────────────────
+    const ptMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.03, transparent: true, opacity: 0.5 });
+    const pts   = new THREE.Points(new THREE.IcosahedronGeometry(1.55, 3), ptMat);
+    group.add(pts);
+
+    // Mouse reactivity
+    const mouse  = { x: 0, y: 0 };
+    const lerped = { x: 0, y: 0 };
+    const onMouseMove = (e: MouseEvent) => {
+      mouse.x =  (e.clientX / window.innerWidth  - 0.5);
+      mouse.y = -(e.clientY / window.innerHeight - 0.5);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
     const clock = new THREE.Clock();
     let animId: number;
-
     const animate = () => {
       animId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
-
-      ico.rotation.y    =  t * 0.22;
-      ico.rotation.x    =  t * 0.10;
-      points.rotation.y = -t * 0.14;
-      points.rotation.z =  t * 0.06;
-      outer.rotation.y  =  t * 0.08;
-      outer.rotation.x  = -t * 0.05;
-
+      lerped.x += (mouse.x - lerped.x) * 0.04;
+      lerped.y += (mouse.y - lerped.y) * 0.04;
+      group.rotation.y = t * 0.22 + lerped.x * 0.8;
+      group.rotation.x = t * 0.10 + lerped.y * 0.6;
+      pts.rotation.y   = -t * 0.14;
       renderer.render(scene, camera);
     };
     animate();
 
-    // ── Scroll: la forma se aleja y desvanece ───────────
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#hero',
-          start: 'top top',
-          end: '60% top',
-          scrub: 1,
-        },
-      });
-
-      tl.to(ico.position,    { z: -2,  duration: 1 }, 0)
+      const tl = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: '60% top', scrub: 1 } });
+      tl.to(group.position, { z: -2, duration: 1 }, 0)
         .to(icoMat,          { opacity: 0, duration: 1 }, 0)
         .to(ptMat,           { opacity: 0, duration: 0.8 }, 0)
         .to(outerMat,        { opacity: 0, duration: 0.8 }, 0)
-        .to(ico.scale,       { x: 0.6, y: 0.6, z: 0.6, duration: 1 }, 0);
+        .to(group.scale,     { x: 0.6, y: 0.6, z: 0.6, duration: 1 }, 0);
     });
 
-    // ── Resize ──────────────────────────────────────────
     const onResize = () => {
-      const nw = container.offsetWidth;
-      const nh = container.offsetHeight;
+      const nw = container.offsetWidth, nh = container.offsetHeight;
       camera.aspect = nw / nh;
       camera.updateProjectionMatrix();
       renderer.setSize(nw, nh);
@@ -106,12 +79,11 @@ const HeroShape = () => {
 
     return () => {
       cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
       renderer.dispose();
       ctx.revert();
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
     };
   }, []);
 
@@ -121,13 +93,14 @@ const HeroShape = () => {
       className="hidden lg:block"
       style={{
         position: 'absolute',
-        right: '3vw',
+        right: '1vw',
         top: '50%',
         transform: 'translateY(-50%)',
-        width: 'clamp(320px, 34vw, 520px)',
-        height: 'clamp(320px, 34vw, 520px)',
+        width: 'clamp(300px, 33vw, 480px)',
+        height: 'clamp(300px, 33vw, 480px)',
         pointerEvents: 'none',
         zIndex: 0,
+        background: 'transparent',
       }}
     />
   );

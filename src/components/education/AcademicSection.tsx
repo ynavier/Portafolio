@@ -18,7 +18,7 @@ const AcademicSection = () => {
             style={{
               backgroundColor: 'var(--bg-card)',
               border: '1px solid var(--border)',
-              borderRadius: '12px',
+              borderRadius: '4px',
               padding: '1.5rem',
               transition: 'border-color 0.2s',
             }}

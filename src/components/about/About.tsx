@@ -4,11 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STATS = [
-  { num: 'UPC', label: 'Ingeniero de Sistemas' },
-  { num: '5+', label: 'Proyectos desarrollados' },
-  { num: '8+', label: 'Tecnologías dominadas' },
-];
 
 const PARAGRAPHS = [
   'Soy Ingeniero de Sistemas graduado de la Universidad Popular del Cesar, con enfoque principal en el ecosistema de datos moderno y Business Intelligence.',
@@ -65,10 +60,6 @@ const About = () => {
       });
 
       // Stats: stagger al entrar
-      gsap.from('.ab-stat', {
-        opacity: 0, y: 24, duration: 0.6, stagger: 0.1, ease: 'expo.out',
-        scrollTrigger: { trigger: '.ab-stats', start: 'top 90%', ...st },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -94,11 +85,11 @@ const About = () => {
         </div>
 
         <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem 6rem', alignItems: 'start' }}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1px 1fr', gap: '0', alignItems: 'start' }}
           className="block lg:grid"
         >
-          {/* Izquierda: titular + stats */}
-          <div>
+          {/* Izquierda: titular */}
+          <div style={{ paddingRight: '3rem' }}>
             <h2
               className="ab-title font-display font-extrabold"
               style={{
@@ -117,30 +108,18 @@ const About = () => {
               <span style={{ color: 'var(--accent)' }}>decisiones.</span>
             </h2>
 
-            <div
-              className="ab-stats"
-              style={{
-                display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '1.5rem', paddingTop: '2rem',
-                borderTop: '1px solid var(--border)',
-              }}
-            >
-              {STATS.map((s) => (
-                <div key={s.label} className="ab-stat">
-                  <div
-                    className="font-display font-extrabold"
-                    style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', color: 'var(--fg)', letterSpacing: '-0.02em' }}
-                  >
-                    {s.num}
-                  </div>
-                  <div className="text-label" style={{ marginTop: '0.25rem' }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
+          {/* Línea divisora con margen para no tocar los bordes */}
+          <div style={{
+            width: 1,
+            backgroundColor: 'rgba(255,255,255,0.18)',
+            alignSelf: 'stretch',
+            margin: '2.5rem 0',
+          }} />
+
           {/* Derecha: párrafos con word reveal */}
-          <div className="ab-paragraphs" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '0.5rem' }}>
+          <div className="ab-paragraphs" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '0.5rem', paddingLeft: '3rem' }}>
             {PARAGRAPHS.map((text, i) => (
               <WordSplit
                 key={i}

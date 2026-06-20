@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AcademicSection from './AcademicSection';
 import { certifications } from './educationData';
+import HeroParticles from '../hero/HeroParticles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,9 +39,10 @@ const Education = () => {
     <section
       ref={sectionRef}
       id="education"
-      style={{ backgroundColor: 'var(--bg)', borderTop: '1px solid var(--border)', paddingTop: '7rem', paddingBottom: '7rem' }}
+      style={{ backgroundColor: 'var(--bg)', borderTop: '1px solid var(--border)', paddingTop: '7rem', paddingBottom: '7rem', position: 'relative' }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.75rem' }}>
+      <HeroParticles />
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.75rem', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
         <div className="ed-tag flex items-baseline gap-3 mb-10">

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Header from './components/header/Header';
 import CustomCursor from './components/common/CustomCursor';
+import ScrollLayout from './components/common/ScrollLayout';
 import Hero from './components/hero/Hero';
 import About from './components/about/About';
 import TechStack from './components/techStack/TechStack';
