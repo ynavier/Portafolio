@@ -49,10 +49,14 @@ const ContactForm: React.FC<Props> = ({ emailjsLoaded, showNotification }) => {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
-          to_email: 'yorielvidal@gmail.com',
-          reply_to: formData.email,
           current_date: currentDate,
-        });
+          nombre: formData.name,
+          'correo electrónico': formData.email,
+          desde_nombre: formData.name,
+          'desde_correo electrónico': formData.email,
+          fecha_actual: currentDate,
+          mensaje: formData.message,
+        }, 'jRmXar2zLQUmyrJ3_');
         setIsSubmitted(true);
         showNotification('success', '¡Mensaje enviado exitosamente! Te contactaré pronto.');
         setFormData({ name: '', email: '', message: '' });

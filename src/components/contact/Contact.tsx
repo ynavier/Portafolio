@@ -20,7 +20,7 @@ const Contact = () => {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
     script.async = true;
-    script.onload = () => { window.emailjs.init('RZPeuWFNsCynZ2Zw3'); setEmailjsLoaded(true); };
+    script.onload = () => { window.emailjs.init('jRmXar2zLQUmyrJ3_'); setEmailjsLoaded(true); };
     document.head.appendChild(script);
     return () => { document.head.removeChild(script); };
   }, []);
