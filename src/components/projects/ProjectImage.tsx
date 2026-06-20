@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ProjectImageProps {
   image: string;
@@ -8,36 +8,40 @@ interface ProjectImageProps {
   hasLiveDemo?: boolean;
 }
 
-const ProjectImage: React.FC<ProjectImageProps> = ({ 
-  image, 
-  title, 
-  category, 
-  Icon, 
-  hasLiveDemo = false 
-}) => {
+const ProjectImage: React.FC<ProjectImageProps> = ({ image, title, hasLiveDemo = false }) => {
   return (
-    <div className="relative overflow-hidden">
+    <div style={{ position: 'relative', height: 200, overflow: 'hidden' }}>
       <img
         src={image}
         alt={title}
-        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       />
-      <div className="absolute top-4 right-4">
-        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-2">
-          <Icon className="w-5 h-5 text-blue-600" />
-        </div>
-      </div>
-      <div className="absolute bottom-4 left-4 flex items-center space-x-2">
-        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-          {category}
-        </span>
-        {hasLiveDemo && (
-          <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
-            <div className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></div>
+      {hasLiveDemo && (
+        <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem' }}>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              backgroundColor: 'rgba(8,8,8,0.8)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(74,207,96,0.3)',
+              color: '#4acf60',
+              padding: '0.25rem 0.6rem',
+              borderRadius: '100px',
+              fontSize: '0.65rem',
+              fontWeight: 600,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span style={{ width: 5, height: 5, borderRadius: '50%', backgroundColor: '#4acf60', animation: 'pulse 2s infinite', display: 'inline-block' }} />
             Live
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

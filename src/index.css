@@ -3,41 +3,93 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #080808;
+    --bg-card: #101010;
+    --bg-alt: #0e0e0e;
+    --fg: #e8e4dc;
+    --fg-muted: #505050;
+    --fg-subtle: #282828;
+    --accent: #4a65f5;
+    --accent-dim: rgba(74, 101, 245, 0.12);
+    --border: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.11);
+  }
+
   html {
-    /* scroll-behavior: smooth; */
+    background-color: var(--bg);
+    color: var(--fg);
     overflow-x: hidden;
-  }
-
-  body {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* Ocultar scrollbar pero mantener funcionalidad */
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-
-  /* Para Firefox */
-  * {
     scrollbar-width: none;
-  }
-
-  /* Para IE y Edge */
-  body {
     -ms-overflow-style: none;
   }
+  html::-webkit-scrollbar { display: none; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::-webkit-scrollbar { display: none; }
+
+  ::selection {
+    background-color: var(--accent);
+    color: #fff;
+  }
+
+  * { box-sizing: border-box; }
 }
 
 @layer utilities {
+  .font-display {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* Hero-scale display text */
+  .text-hero {
+    font-size: clamp(2rem, 7vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  /* Section title */
+  .text-section {
+    font-size: clamp(2.2rem, 5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+
+  /* Small uppercase label */
+  .text-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--fg-muted);
+  }
+
+  .border-subtle {
+    border-color: var(--border);
+  }
+  .border-strong {
+    border-color: var(--border-strong);
+  }
+
+  /* Clip reveal helper */
+  .clip-y {
+    clip-path: inset(0 0 100% 0);
+  }
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  
   .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;

@@ -1,5 +1,6 @@
 export interface ProjectProps {
   id: number;
+  index?: number;
   title: string;
   description: string;
   image: string;

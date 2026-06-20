@@ -1,51 +1,51 @@
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { useEffect, useRef, ReactNode } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getAnimationConfig, AnimationVariant } from './animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
+  variant?: AnimationVariant;
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right';
-  blur?: boolean;
 }
 
 const AnimatedSection = ({
   children,
   className = '',
+  variant = 'hero-description',
   delay = 0,
-  direction = 'up',
-  blur = true,
 }: AnimatedSectionProps) => {
-  const directions = {
-    up: { y: 30, x: 0 },
-    down: { y: -30, x: 0 },
-    left: { x: 30, y: 0 },
-    right: { x: -30, y: 0 },
-  };
+  const ref = useRef<HTMLDivElement>(null);
+  const config = getAnimationConfig(variant);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(ref.current!, {
+        ...config.from,
+        duration: config.duration,
+        delay: (config.delay ?? 0) + delay,
+        ease: config.ease,
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 90%',
+          end: 'bottom top',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        ...directions[direction],
-        filter: blur ? 'blur(10px)' : 'blur(0px)',
-      }}
-      whileInView={{
-        opacity: 1,
-        x: 0,
-        y: 0,
-        filter: 'blur(0px)',
-      }}
-      viewport={{ once: true, margin: '-50px', amount: 0.2 }}
-      transition={{
-        duration: 0.8,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={className}
-    >
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

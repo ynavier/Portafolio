@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedWords from "../common/AnimatedWords";
 
 const AboutText: React.FC = () => {
   const skills = [
@@ -14,26 +15,20 @@ const AboutText: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-        🌟 Soy estudiante de Ingeniería de Sistemas <strong>(10.º semestre)</strong> 
-        en la Universidad Popular del Cesar, con gran interés y formación 
-        en el ecosistema de datos moderno 📊.
-      </p>
+      <AnimatedWords
+        text="🌟 Soy estudiante de Ingeniería de Sistemas (10.º semestre) en la Universidad Popular del Cesar, con gran interés y formación en el ecosistema de datos moderno 📊."
+        className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+      />
 
-      <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-        🚀 Me apasiona transformar datos en conocimiento útil, desde la ingesta y 
-        transformación hasta la visualización y análisis predictivo 🤖. Durante mi formación 
-        he fortalecido mis competencias en programación, bases de datos, BI y herramientas cloud, 
-        lo que me ha permitido desarrollar proyectos académicos y personales orientados a la analítica de datos y 
-        la inteligencia de negocios.
-      </p>
+      <AnimatedWords
+        text="🚀 Me apasiona transformar datos en conocimiento útil, desde la ingesta y transformación hasta la visualización y análisis predictivo 🤖. Durante mi formación he fortalecido mis competencias en programación, bases de datos, BI y herramientas cloud, lo que me ha permitido desarrollar proyectos académicos y personales orientados a la analítica de datos y la inteligencia de negocios."
+        className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+      />
 
-      <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-        💡 Mi objetivo es seguir aprendiendo y crecer como Ingeniero de Datos, 
-        aportando soluciones innovadoras que impulsen la toma de decisiones estratégicas en las organizaciones.
-      </p>
-
-      
+      <AnimatedWords
+        text="💡 Mi objetivo es seguir aprendiendo y crecer como Ingeniero de Datos, aportando soluciones innovadoras que impulsen la toma de decisiones estratégicas en las organizaciones."
+        className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+      />
     </div>
   );
 };

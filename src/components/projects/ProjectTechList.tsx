@@ -1,21 +1,25 @@
-import React from "react";
-
 interface ProjectTechListProps {
   technologies: string[];
 }
 
 const ProjectTechList: React.FC<ProjectTechListProps> = ({ technologies }) => (
-  <div className="mb-4">
-    <div className="flex flex-wrap gap-2">
-      {technologies.map((tech, index) => (
-        <span
-          key={index}
-          className="px-2 py-1 bg-slate-100 dark:bg-gray-600 text-slate-700 dark:text-gray-300 rounded text-xs font-medium"
-        >
-          {tech}
-        </span>
-      ))}
-    </div>
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.5rem' }}>
+    {technologies.map((tech, index) => (
+      <span
+        key={index}
+        style={{
+          padding: '0.2rem 0.6rem',
+          backgroundColor: 'var(--fg-subtle)',
+          color: 'var(--fg-muted)',
+          borderRadius: '4px',
+          fontSize: '0.7rem',
+          fontWeight: 500,
+          letterSpacing: '0.04em',
+        }}
+      >
+        {tech}
+      </span>
+    ))}
   </div>
 );
 

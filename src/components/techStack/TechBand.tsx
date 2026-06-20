@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Tech {
   name: string;
   color: string;
@@ -8,40 +6,35 @@ interface Tech {
 
 export const TechBand = ({
   techs,
-  direction = "left",
-  speed = "slow",
+  direction = 'left',
+  speed = 'slow',
 }: {
   techs: Tech[];
-  direction?: "left" | "right";
-  speed?: "slow" | "medium" | "fast";
+  direction?: 'left' | 'right';
+  speed?: 'slow' | 'medium' | 'fast';
 }) => {
   const speedClass =
-    speed === "fast"
-      ? "animate-scroll-fast"
-      : speed === "medium"
-      ? "animate-scroll-medium"
-      : "animate-scroll-slow";
-
-  const directionClass = direction === "right" ? "animate-scroll-reverse" : "";
+    speed === 'fast' ? 'animate-scroll-fast' : speed === 'medium' ? 'animate-scroll-medium' : 'animate-scroll-slow';
+  const directionClass = direction === 'right' ? 'animate-scroll-reverse' : '';
 
   return (
-    <div className="relative overflow-hidden py-3">
-      {/* Bordes gradientes */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 to-transparent dark:from-gray-900 z-10"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 to-transparent dark:from-gray-900 z-10"></div>
+    <div className="relative overflow-hidden py-2">
+      {/* Edge fades */}
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 80, background: 'linear-gradient(to right, var(--bg), transparent)', zIndex: 10 }} />
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 80, background: 'linear-gradient(to left, var(--bg), transparent)', zIndex: 10 }} />
 
-      <div className={`flex space-x-8 whitespace-nowrap ${speedClass} ${directionClass}`}>
+      <div className={`flex items-center whitespace-nowrap ${speedClass} ${directionClass}`}>
         {[...techs, ...techs, ...techs].map((tech, index) => {
           const IconComponent = tech.icon;
           return (
-            <div
-              key={index}
-              className="flex items-center space-x-3 px-6 py-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-full hover:bg-white/90 dark:hover:bg-gray-700/90 transition-all duration-300 hover:scale-105 border border-gray-200/50 dark:border-gray-600/50 shadow-lg hover:shadow-xl"
-            >
-              <IconComponent className={`w-5 h-5 ${tech.color}`} />
-              <span className="text-gray-800 dark:text-gray-200 font-medium text-sm">
-                {tech.name}
-              </span>
+            <div key={index} className="flex items-center">
+              <div className="flex items-center space-x-2 px-5 py-2" style={{ cursor: 'default' }}>
+                <IconComponent className={`w-4 h-4 ${tech.color}`} />
+                <span style={{ color: 'var(--fg)', fontSize: '0.8rem', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                  {tech.name}
+                </span>
+              </div>
+              <span style={{ color: 'var(--fg-subtle)', fontSize: '0.9rem', userSelect: 'none', flexShrink: 0 }}>|</span>
             </div>
           );
         })}

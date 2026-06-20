@@ -1,5 +1,8 @@
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { useEffect, useRef, ReactNode } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface StaggeredContainerProps {
   children: ReactNode;
@@ -12,52 +15,41 @@ const StaggeredContainer = ({
   className = '',
   staggerDelay = 0.15,
 }: StaggeredContainerProps) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: staggerDelay,
-        delayChildren: 0.1,
-      },
-    },
-  };
+  const ref = useRef<HTMLDivElement>(null);
 
-  return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-100px', amount: 0.1 }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
+  useEffect(() => {
+    if (!ref.current) return;
 
-export const StaggeredItem = ({ children, className = '' }: { children: ReactNode; className?: string }) => {
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-    },
-  };
+    const items = ref.current.querySelectorAll<HTMLElement>('.stagger-item');
 
-  return (
-    <motion.div
-      variants={itemVariants}
-      className={className}
-      transition={{
+    const ctx = gsap.context(() => {
+      gsap.from(items, {
+        opacity: 0,
+        y: 30,
+        scale: 0.95,
         duration: 0.7,
-        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-      }}
-    >
+        ease: 'expo.out',
+        stagger: staggerDelay,
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={ref} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
+
+export const StaggeredItem = ({ children, className = '' }: { children: ReactNode; className?: string }) => (
+  <div className={`stagger-item ${className}`}>{children}</div>
+);
 
 export default StaggeredContainer;

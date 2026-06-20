@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RepoInfo } from "../types/project";
-import { REPOS, manualData, financyBankManual } from "../config/projectsConfig";
+import { REPOS, manualData } from "../config/projectsConfig";
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<RepoInfo[]>([]);
@@ -26,7 +26,7 @@ export const useProjects = () => {
     const fetchAll = async () => {
       const results = await Promise.all(REPOS.map(r => fetchRepo(r.owner, r.name)));
       const publicProjects = results.filter(Boolean) as RepoInfo[];
-      setProjects([...publicProjects, financyBankManual]);
+      setProjects(publicProjects);
       setLoading(false);
     };
 

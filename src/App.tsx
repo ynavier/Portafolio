@@ -1,4 +1,4 @@
-import { useDarkMode } from './hooks/useDarkMode';
+import { useEffect } from 'react';
 import Header from './components/header/Header';
 import Hero from './components/hero/Hero';
 import About from './components/about/About';
@@ -10,12 +10,14 @@ import Footer from './components/footer/Footer';
 import SmoothScroll from './components/common/SmoothScroll';
 
 function App() {
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
 
   return (
     <SmoothScroll>
-      <div className="min-h-screen bg-slate-50 dark:bg-gray-900 transition-colors duration-300">
-        <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <div style={{ backgroundColor: 'var(--bg)', color: 'var(--fg)', minHeight: '100vh' }}>
+        <Header />
         <Hero />
         <About />
         <TechStack />

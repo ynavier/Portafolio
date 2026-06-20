@@ -4,9 +4,9 @@ export const education = [
   {
     degree: "Ingeniería de Sistemas",
     institution: "Universidad Popular del Cesar",
-    year: "2020 - Actualidad",
-    description: "Enfoque en desarrollo de software, bases de datos y arquitecturas distribuidas",
-    grade: "Noveno Semestre"
+    year: "2020 - 2025",
+    description: "Enfoque en desarrollo de software, bases de datos y arquitecturas distribuidas. Graduado en septiembre de 2025.",
+    grade: "Graduado"
   }
 ];
 

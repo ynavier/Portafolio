@@ -1,37 +1,55 @@
-import { GraduationCap, Calendar } from "lucide-react";
-import { education } from "./educationData";
+import { education } from './educationData';
 
 const AcademicSection = () => {
   return (
-    <div className="mb-16">
-      <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8 flex items-center">
-        <GraduationCap className="w-6 h-6 mr-3 text-blue-600 dark:text-blue-400" />
-        Formación Académica
+    <div>
+      <h3
+        className="font-display font-bold"
+        style={{ color: 'var(--fg)', fontSize: '1rem', letterSpacing: '0.04em', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+      >
+        <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--accent)', display: 'inline-block', flexShrink: 0 }} />
+        Formación académica
       </h3>
-      <div className="space-y-6">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {education.map((item, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            className="ed-item"
+            style={{
+              backgroundColor: 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              borderRadius: '12px',
+              padding: '1.5rem',
+              transition: 'border-color 0.2s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--border-strong)')}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
           >
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-              <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
-                  {item.degree}
-                </h4>
-                <p className="text-blue-600 dark:text-blue-400 font-medium">
-                  {item.institution}
-                </p>
-              </div>
-              <div className="mt-2 md:mt-0 text-right">
-                <span className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  {item.year}
-                </span>
-                
-              </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem', gap: '1rem' }}>
+              <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '1rem', lineHeight: 1.3 }}>
+                {item.degree}
+              </h4>
+              <span
+                style={{
+                  flexShrink: 0,
+                  backgroundColor: 'var(--accent-dim)',
+                  color: 'var(--accent)',
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: '100px',
+                  fontSize: '0.68rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.05em',
+                }}
+              >
+                2025
+              </span>
             </div>
-            <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+            <p style={{ color: 'var(--accent)', fontSize: '0.82rem', fontWeight: 500, marginBottom: '0.5rem' }}>
+              {item.institution}
+            </p>
+            <p style={{ color: 'var(--fg-muted)', fontSize: '0.875rem', lineHeight: 1.6 }}>
+              {item.description}
+            </p>
           </div>
         ))}
       </div>
