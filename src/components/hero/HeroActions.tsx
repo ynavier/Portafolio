@@ -4,8 +4,8 @@ import { Download } from "lucide-react";
 const handleDownloadCV = () => {
   const link = document.createElement("a");
   link.href =
-    "https://drive.google.com/uc?export=download&id=1Kb1dzbOli2npQ52kdhbbXcvxp4b-B0ze";
-  link.download = "CV_Yoriel_Carvajalino.pdf";
+    "https://drive.google.com/uc?export=download&id=19zTCdtBFLr7WgIh5rHvj8Gba0fN6tOQw";
+  link.download = "CV_Yoriel.pdf";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
