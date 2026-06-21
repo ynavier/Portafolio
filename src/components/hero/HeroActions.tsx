@@ -4,7 +4,7 @@ import { Download } from "lucide-react";
 const handleDownloadCV = () => {
   const link = document.createElement("a");
   link.href =
-    "https://drive.google.com/uc?export=download&id=19zTCdtBFLr7WgIh5rHvj8Gba0fN6tOQw&confirm=t";
+    "https://drive.usercontent.google.com/download?id=19zTCdtBFLr7WgIh5rHvj8Gba0fN6tOQw&export=download&authuser=0";
   link.download = "CV_Yoriel Vidal.pdf";
   document.body.appendChild(link);
   link.click();
