@@ -40,8 +40,8 @@ const Hero = () => {
 
   const handleDownloadCV = () => {
     const a = document.createElement('a');
-    a.href = 'https://drive.google.com/uc?export=download&id=1Kb1dzbOli2npQ52kdhbbXcvxp4b-B0ze';
-    a.download = 'CV_Yoriel_Carvajalino.pdf';
+    a.href = 'https://drive.usercontent.google.com/download?id=19zTCdtBFLr7WgIh5rHvj8Gba0fN6tOQw&export=download&authuser=0';
+    a.download = 'CV_Yoriel_Vidal.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
