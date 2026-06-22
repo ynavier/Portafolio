@@ -1,6 +1,20 @@
-import { Cloud, BarChart3, Brain, Database } from "lucide-react";
+import { Cloud, BarChart3, Brain, Database, Globe } from "lucide-react";
 
 export const projects = [
+  {
+    id: 0,
+    title: "Pipeline ETL Clima LATAM",
+    description:
+      "Pipeline ETL end-to-end que extrae datos climáticos de 100 ciudades latinoamericanas usando Open-Meteo API, valida calidad con 7 checks automáticos, transforma con pandas y visualiza en un dashboard interactivo con globo terráqueo 3D, glassmorphism y animaciones GSAP.",
+    image:
+      "https://images.pexels.com/photos/1431822/pexels-photo-1431822.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop",
+    technologies: ["Python", "pandas", "Streamlit", "Plotly", "dbt", "BigQuery", "GitHub Actions"],
+    icon: Globe,
+    demo: "https://climalatam.streamlit.app/",
+    github: "https://github.com/ynavier/clima-latam-etl",
+    category: "Data Engineering",
+    hasLiveDemo: true,
+  },
   {
     id: 1,
     title: "Pipeline de Datos E-commerce en GCP",
@@ -12,6 +26,7 @@ export const projects = [
     icon: Cloud,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Data Engineering",
   },
   {
@@ -25,6 +40,7 @@ export const projects = [
     icon: BarChart3,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Business Intelligence",
   },
   {
@@ -38,6 +54,7 @@ export const projects = [
     icon: Brain,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Machine Learning",
   },
   {
@@ -51,6 +68,7 @@ export const projects = [
     icon: Database,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Data Warehousing",
   },
   {
@@ -64,6 +82,7 @@ export const projects = [
     icon: Cloud,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Real-time Analytics",
   },
   {
@@ -77,6 +96,7 @@ export const projects = [
     icon: Database,
     demo: "#",
     github: "#",
+    hasLiveDemo: false,
     category: "Cloud Migration",
   },
 ];
