@@ -50,9 +50,9 @@ const Education = () => {
           <span className="text-label">Formación</span>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 1rem', marginBottom: '4rem' }}>
-          <h2 className="ed-title-left  font-display font-extrabold text-section" style={{ color: 'var(--fg)', lineHeight: 0.92 }}>EDUCACIÓN</h2>
-          <h2 className="ed-title-right font-display font-extrabold text-section" style={{ color: 'var(--fg)', lineHeight: 0.92 }}>&amp; CERTIFICACIONES</h2>
+        <div style={{ marginBottom: '4rem' }}>
+          <h2 className="ed-title-left font-display font-extrabold text-section" style={{ color: 'var(--fg)', lineHeight: 0.95 }}>EDUCACIÓN</h2>
+          <h2 className="ed-title-right font-display font-extrabold text-section" style={{ color: 'var(--fg)', lineHeight: 0.95 }}>&amp; CERTIFICACIONES</h2>
         </div>
 
         {/* Formación académica */}
@@ -70,8 +70,8 @@ const Education = () => {
         {/* Línea de tiempo vertical */}
         <div style={{ position: 'relative' }}>
 
-          {/* Línea central */}
-          <div style={{
+          {/* Línea central — solo desktop */}
+          <div className="ed-center-line" style={{
             position: 'absolute',
             left: '50%',
             top: 0, bottom: 0,
@@ -81,69 +81,64 @@ const Education = () => {
           }} />
 
           {certifications.map((cert, i) => {
-            const isLeft = i % 2 === 0; // par → fecha izq, cert der | impar → cert izq, fecha der
+            const isLeft = i % 2 === 0;
 
             return (
-              <div
-                key={i}
-                className="ed-tl-item"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '2rem',
-                  marginBottom: '2.5rem',
-                  alignItems: 'center',
-                  minHeight: '100px',
-                  position: 'relative',
-                }}
-              >
-                {/* Dot central */}
-                <div style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--accent)',
-                  boxShadow: '0 0 0 3px var(--bg), 0 0 0 4px var(--border-strong)',
-                  zIndex: 1,
-                }} />
+              <div key={i} className="ed-tl-item" style={{ marginBottom: '2.5rem', position: 'relative' }}>
 
-                {/* Columna izquierda */}
-                <div style={{ textAlign: isLeft ? 'right' : 'left', paddingRight: isLeft ? '2rem' : 0, paddingLeft: isLeft ? 0 : '2rem' }}>
-                  {isLeft ? (
-                    /* Par: fecha a la izquierda */
-                    <div>
-                      <p style={{ color: 'var(--fg-muted)', fontSize: '0.75rem', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{cert.date}</p>
-                      <p style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{cert.issuer}</p>
-                    </div>
-                  ) : (
-                    /* Impar: certificación a la izquierda */
-                    <div>
-                      <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '0.95rem', lineHeight: 1.3, marginBottom: '0.4rem' }}>{cert.name}</h4>
-                      <p className="line-clamp-2" style={{ color: 'var(--fg-muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{cert.description}</p>
-                    </div>
-                  )}
+                {/* ── MOBILE: tarjeta simple ── */}
+                <div className="ed-tl-card">
+                  <p style={{ color: 'var(--fg-muted)', fontSize: '0.7rem', letterSpacing: '0.06em' }}>{cert.date} · <span style={{ color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{cert.issuer}</span></p>
+                  <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '0.9rem', lineHeight: 1.3, margin: '0.3rem 0 0.25rem' }}>{cert.name}</h4>
+                  <p style={{ color: 'var(--fg-muted)', fontSize: '0.78rem', lineHeight: 1.6, margin: 0 }}>{cert.description}</p>
                 </div>
 
-                {/* Columna derecha */}
-                <div style={{ textAlign: 'left', paddingLeft: '2rem' }}>
-                  {isLeft ? (
-                    /* Par: certificación a la derecha */
-                    <div>
-                      <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '0.95rem', lineHeight: 1.3, marginBottom: '0.4rem' }}>{cert.name}</h4>
-                      <p className="line-clamp-2" style={{ color: 'var(--fg-muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{cert.description}</p>
-                    </div>
-                  ) : (
-                    /* Impar: fecha a la derecha */
-                    <div>
-                      <p style={{ color: 'var(--fg-muted)', fontSize: '0.75rem', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{cert.date}</p>
-                      <p style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{cert.issuer}</p>
-                    </div>
-                  )}
+                {/* ── DESKTOP: zigzag de 2 columnas ── */}
+                <div
+                  className="ed-tl-desktop"
+                  style={{ gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'center', minHeight: '100px', position: 'relative' }}
+                >
+                  {/* Dot central */}
+                  <div className="ed-center-dot" style={{
+                    position: 'absolute', left: '50%', top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 8, height: 8, borderRadius: '50%',
+                    backgroundColor: 'var(--accent)',
+                    boxShadow: '0 0 0 3px var(--bg), 0 0 0 4px var(--border-strong)',
+                    zIndex: 1,
+                  }} />
+
+                  {/* Columna izquierda */}
+                  <div style={{ textAlign: isLeft ? 'right' : 'left', paddingRight: isLeft ? '2rem' : 0, paddingLeft: isLeft ? 0 : '2rem' }}>
+                    {isLeft ? (
+                      <div>
+                        <p style={{ color: 'var(--fg-muted)', fontSize: '0.75rem', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{cert.date}</p>
+                        <p style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{cert.issuer}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '0.95rem', lineHeight: 1.3, marginBottom: '0.4rem' }}>{cert.name}</h4>
+                        <p className="line-clamp-2" style={{ color: 'var(--fg-muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{cert.description}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Columna derecha */}
+                  <div style={{ textAlign: 'left', paddingLeft: '2rem' }}>
+                    {isLeft ? (
+                      <div>
+                        <h4 className="font-display font-bold" style={{ color: 'var(--fg)', fontSize: '0.95rem', lineHeight: 1.3, marginBottom: '0.4rem' }}>{cert.name}</h4>
+                        <p className="line-clamp-2" style={{ color: 'var(--fg-muted)', fontSize: '0.8rem', lineHeight: 1.6 }}>{cert.description}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p style={{ color: 'var(--fg-muted)', fontSize: '0.75rem', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{cert.date}</p>
+                        <p style={{ color: 'var(--accent)', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{cert.issuer}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
+
               </div>
             );
           })}

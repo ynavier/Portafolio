@@ -14,8 +14,8 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
       tl.from('.h-label', { opacity: 0, y: 14, duration: 0.8, ease: 'expo.out' })
-        .from('.h-line-1', { y: '105%', duration: 1, ease: 'expo.out' }, '-=0.5')
-        .from('.h-line-2', { y: '105%', duration: 1, ease: 'expo.out' }, '-=0.75')
+        .from('.h-line-1', { clipPath: 'inset(0 0 100% 0)', duration: 1, ease: 'expo.out' }, '-=0.5')
+        .from('.h-line-2', { clipPath: 'inset(0 0 100% 0)', duration: 1, ease: 'expo.out' }, '-=0.75')
         .from('.h-sep', { scaleX: 0, duration: 0.9, ease: 'expo.out', transformOrigin: 'left' }, '-=0.4')
         .from('.h-desc', { opacity: 0, y: 18, duration: 0.8, ease: 'expo.out' }, '-=0.5')
         .from('.h-socials', { opacity: 0, y: 14, duration: 0.7, ease: 'expo.out' }, '-=0.4')
@@ -76,16 +76,12 @@ const Hero = () => {
 
         {/* Name */}
         <h1 style={{ marginBottom: 0 }}>
-          <div style={{ overflow: 'hidden' }}>
-            <span className="h-line-1 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
-              YORIEL
-            </span>
-          </div>
-          <div style={{ overflow: 'hidden' }}>
-            <span className="h-line-2 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
-              CARVAJALINO
-            </span>
-          </div>
+          <span className="h-line-1 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
+            YORIEL
+          </span>
+          <span className="h-line-2 block font-display font-extrabold text-hero" style={{ color: 'var(--fg)' }}>
+            CARVAJALINO
+          </span>
         </h1>
 
         {/* Separator — llega hasta donde termina CARVAJALINO, no hasta la esfera */}

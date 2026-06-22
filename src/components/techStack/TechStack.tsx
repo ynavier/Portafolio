@@ -69,24 +69,13 @@ const TechStack = () => {
         overflow: 'hidden',
       }}
     >
-      {/* Canvas full-width como fondo de espacio */}
-      <div style={{ position: 'absolute', inset: 0 }}>
+      {/* Canvas full-width como fondo de espacio — oculto en mobile */}
+      <div className="ts-solar" style={{ position: 'absolute', inset: 0 }}>
         <SolarSystem />
       </div>
 
-      {/* Overlay derecho: título + barras flotando en el espacio */}
-      <div style={{
-        position: 'absolute',
-        top: 0, right: 0,
-        width: '42%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '0 2.5rem 0 1.5rem',
-        alignItems: 'flex-end',
-        paddingBottom: '8vh',
-      }}>
+      {/* Overlay: título + barras flotando en el espacio */}
+      <div className="ts-overlay" style={{ display: 'flex', flexDirection: 'column' }}>
         {/* Tag */}
         <div className="ts-tag" style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem', marginBottom: '1.5rem' }}>
           <span className="text-label">Stack tecnológico</span>
@@ -97,14 +86,14 @@ const TechStack = () => {
         <h2
           className="ts-title-1 font-display font-extrabold"
           style={{ color: 'var(--fg)', lineHeight: 0.92, textAlign: 'right', marginBottom: '0.06em',
-            fontSize: 'clamp(2rem, 4.2vw, 4.5rem)', letterSpacing: '-0.025em' }}
+            fontSize: 'clamp(1.5rem, 7vw, 4.5rem)', letterSpacing: '-0.025em' }}
         >
           STACK
         </h2>
         <h2
           className="ts-title-2 font-display font-extrabold"
           style={{ color: 'var(--fg)', lineHeight: 0.92, textAlign: 'right', marginBottom: '2rem',
-            fontSize: 'clamp(2rem, 4.2vw, 4.5rem)', letterSpacing: '-0.025em' }}
+            fontSize: 'clamp(1.5rem, 7vw, 4.5rem)', letterSpacing: '-0.025em' }}
         >
           TECNOLÓGICO
         </h2>
@@ -120,13 +109,13 @@ const TechStack = () => {
         <div className="ts-bars" style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
           {TECHS.map((t, i) => (
             <div key={t.name}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'baseline', marginBottom: '5px' }}>
+              <div className="ts-bar-label" style={{ display: 'flex', alignItems: 'baseline', marginBottom: '5px' }}>
                 <span style={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--fg)', letterSpacing: '0.04em' }}>
                   {t.name}
                 </span>
               </div>
               {/* Track */}
-              <div style={{ height: 1.5, backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden', position: 'relative', maxWidth: 140, marginLeft: 'auto' }}>
+              <div className="ts-bar-track" style={{ height: 1.5, backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden', position: 'relative', maxWidth: 140 }}>
                 <div
                   className={`ts-bar-${i}`}
                   style={{

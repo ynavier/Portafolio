@@ -88,7 +88,7 @@ const Contact = () => {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }} className="block lg:grid">
+        <div className="contact-grid">
 
           {/* Info */}
           <div className="ct-info" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

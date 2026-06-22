@@ -84,12 +84,9 @@ const About = () => {
           <span className="text-label">Sobre mí</span>
         </div>
 
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1px 1fr', gap: '0', alignItems: 'start' }}
-          className="block lg:grid"
-        >
+        <div className="about-grid">
           {/* Izquierda: titular */}
-          <div style={{ paddingRight: '3rem' }}>
+          <div className="about-left">
             <h2
               className="ab-title font-display font-extrabold"
               style={{
@@ -111,7 +108,7 @@ const About = () => {
           </div>
 
           {/* Línea divisora con margen para no tocar los bordes */}
-          <div style={{
+          <div className="about-divider" style={{
             width: 1,
             backgroundColor: 'rgba(255,255,255,0.18)',
             alignSelf: 'stretch',
@@ -119,7 +116,7 @@ const About = () => {
           }} />
 
           {/* Derecha: párrafos con word reveal */}
-          <div className="ab-paragraphs" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '0.5rem', paddingLeft: '3rem' }}>
+          <div className="ab-paragraphs about-right" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '0.5rem' }}>
             {PARAGRAPHS.map((text, i) => (
               <WordSplit
                 key={i}

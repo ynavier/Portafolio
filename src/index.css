@@ -22,7 +22,6 @@
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    cursor: none;
   }
   html::-webkit-scrollbar { display: none; }
 
@@ -42,7 +41,15 @@
     color: #fff;
   }
 
-  * { box-sizing: border-box; cursor: none; }
+  * { box-sizing: border-box; }
+
+  /* Cursor custom solo en dispositivos con puntero fino (mouse) */
+  @media (pointer: fine) {
+    html { cursor: none; }
+    * { cursor: none; }
+    .btn-cross:hover,
+    .btn-cross-accent:hover { cursor: crosshair; }
+  }
 }
 
 @layer utilities {
@@ -52,7 +59,7 @@
 
   /* Hero-scale display text */
   .text-hero {
-    font-size: clamp(2rem, 7vw, 6.5rem);
+    font-size: clamp(1.5rem, 7vw, 6.5rem);
     line-height: 0.92;
     letter-spacing: -0.03em;
   }
@@ -158,7 +165,7 @@
   }
 
   .btn-cross:hover,
-  .btn-cross-accent:hover { cursor: crosshair; }
+  .btn-cross-accent:hover { cursor: pointer; }
 
   .btn-cross:active,
   .btn-cross-accent:active { transform: scale(0.95); }
@@ -173,6 +180,124 @@
   .btn-cross-accent:hover::after {
     width: calc(100% - 32px);
     left: 16px;
+  }
+
+  /* Títulos de sección: escalan con vw en mobile para evitar overflow */
+  @media (max-width: 500px) {
+    .text-section { font-size: clamp(1rem, 5vw, 5rem); }
+  }
+
+  /* ── Layouts responsivos ───────────────────────────── */
+
+  /* About: grid de 3 columnas (contenido | divisor | contenido) en desktop */
+  .about-grid {
+    display: block;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+  }
+
+  .about-left  { padding-right: 0; }
+  .about-right { padding-left: 0; padding-top: 2rem; }
+  .about-divider { display: none !important; }
+  @media (min-width: 1024px) {
+    .about-left  { padding-right: 3rem; }
+    .about-right { padding-left: 3rem; padding-top: 0; }
+    .about-divider { display: block !important; }
+  }
+
+  /* Contact: grid 2 columnas en desktop */
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  /* Education: timeline zigzag → tarjetas en mobile */
+  .ed-center-line,
+  .ed-center-dot { display: none !important; }
+  @media (min-width: 768px) {
+    .ed-center-line { display: block !important; }
+    .ed-center-dot  { display: block !important; }
+  }
+
+  /* En mobile: cada cert es una tarjeta apilada */
+  .ed-tl-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1rem 1rem 1.25rem;
+    border-left: 2px solid var(--accent);
+    background: var(--bg-card);
+    border-radius: 0 4px 4px 0;
+  }
+  /* Ocultar las cols en mobile — se usa la tarjeta */
+  .ed-tl-desktop { display: none !important; }
+  @media (min-width: 768px) {
+    .ed-tl-card    { display: none !important; }
+    .ed-tl-desktop { display: grid !important; }
+  }
+
+  /* TechStack: sistema solar oculto en mobile */
+  .ts-solar { display: none; }
+  @media (min-width: 768px) {
+    .ts-solar { display: block; }
+  }
+
+  /* TechStack: barras — izquierda en mobile, derecha en desktop */
+  .ts-bar-label { justify-content: flex-start; }
+  .ts-bar-track { margin-left: 0; max-width: 100% !important; }
+  @media (min-width: 768px) {
+    .ts-bar-label { justify-content: flex-end; }
+    .ts-bar-track { margin-left: auto; max-width: 140px !important; }
+  }
+
+  /* TechStack: overlay ocupa ancho completo en mobile */
+  .ts-overlay {
+    position: absolute;
+    z-index: 2;
+    bottom: 0; left: 0; right: 0;
+    top: auto;
+    width: 100% !important;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start !important;
+    padding: 2rem 1.5rem 3rem !important;
+    background: linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.6) 60%, transparent 100%);
+  }
+  .ts-overlay .ts-title-1,
+  .ts-overlay .ts-title-2 { text-align: left !important; }
+  .ts-overlay .ts-sub     { text-align: left !important; }
+  .ts-overlay .ts-bars    { width: 100%; max-width: 260px; }
+  @media (min-width: 768px) {
+    .ts-overlay {
+      bottom: auto;
+      top: 0; right: 0; left: auto;
+      width: 42% !important;
+      height: 100%;
+      justify-content: center;
+      align-items: flex-end !important;
+      padding: 0 2.5rem 8vh 1.5rem !important;
+      background: none;
+    }
+    .ts-overlay .ts-title-1,
+    .ts-overlay .ts-title-2 { text-align: right !important; }
+    .ts-overlay .ts-sub     { text-align: right !important; }
+    .ts-overlay .ts-bars    { max-width: 140px; }
   }
 
   .line-clamp-2 {
