@@ -1,8 +1,9 @@
 import { RepoInfo } from "../types/project";
 
 export const REPOS = [
-  { owner: "ynavier", name: "Desnutricion-PG" }, // carta de presentación
+  { owner: "ynavier", name: "Desnutricion-PG" },
   { owner: "VidalYC", name: "Hackaton_2025" },
+  { owner: "ynavier", name: "clima-latam-etl" },
   { owner: "VidalYC", name: "Gestor_de_Tareas" },
 ];
 
@@ -20,6 +21,7 @@ export const projectDemos: Record<string, string> = {
   "Gestor_de_Tareas": "https://gestor-de-tareas-simple.vercel.app",
   "frontend": "https://frontend-alpha-rust.vercel.app",
   "Hackaton_2025": "https://energy-analitics-2025.vercel.app",
+  "clima-latam-etl": "https://climalatam.streamlit.app/",
 };
 
 export const manualData: Record<string, Partial<RepoInfo>> = {
@@ -32,6 +34,11 @@ export const manualData: Record<string, Partial<RepoInfo>> = {
     title: "EnergyAnalytics",
     description: "Proyecto desarrollado en Hackaton 2025. Análisis y predicción de producción de energía renovable (solar y eólica) en Colombia usando Random Forest, Prophet para series de tiempo y dashboards interactivos con 2.050 registros de producción en MWh.",
     technologies: ["Python", "scikit-learn", "Prophet", "Random Forest", "Pandas", "Flask"]
+  },
+  "clima-latam-etl": {
+    title: "Pipeline ETL Clima LATAM",
+    description: "Pipeline ETL end-to-end que extrae datos climáticos de 100 ciudades latinoamericanas con Open-Meteo API, valida calidad con 7 checks automáticos, transforma con pandas y visualiza en dashboard interactivo con globo terráqueo 3D y animaciones GSAP.",
+    technologies: ["Python", "pandas", "Streamlit", "Plotly", "dbt", "BigQuery", "GitHub Actions"],
   },
   Gestor_de_Tareas: {
     title: "Gestor de Tareas",
